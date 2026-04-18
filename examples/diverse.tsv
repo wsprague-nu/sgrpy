@@ -1,0 +1,7 @@
+name	smiles	group	weight	hf298
+Ethane	CC	1	0.5	-20.24
+Propane	CCC	2	1	-24.82
+n-Butane	CCCC	3	1	-30.15
+Ethanol	CCO	4	1	-56.2
+Ethylene Glycol	OCCO	5	1	-92.4
+Propylene Glycol	OCCCO	6	1	-104.04

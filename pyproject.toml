@@ -1,0 +1,105 @@
+[build-system]
+requires = ["maturin>=1.8,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = 'sgrpy'
+dynamic = [ "version" ]
+authors = [
+    { name='W.W. Sprague', email='wsprague@u.northwestern.edu' },
+]
+description = 'Python package for fragmenting colored graphs'
+license = "GPL-3.0"
+requires-python = '>=3.12'
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Development Status :: 2 - Pre-Alpha",
+]
+dependencies = [
+    "igraph>=1.0,<2",  # order of permutation outputs changed in 1.0
+    "joblib>=1.5,<2",
+    "numpy>=2.3,<3",
+    "polars>=1.31,<1.36",  # temporary due to unclear issue with type casting
+    "scipy>=1.16,<2",
+    "tqdm>=4.67,<5",
+]
+
+[project.optional-dependencies]
+rdkit = [
+    "rdkit"
+]
+doc = [
+    "numpydoc",
+    "sphinx",
+    "sphinx-book-theme",
+]
+lint = [
+    "mypy==1.17",
+    "ruff==0.14",
+    "types-tqdm",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+profile = [
+    "scalene",
+    "snakeviz",
+]
+dev = [
+    "sgrpy[doc,rdkit,lint,profile,test]",
+]
+
+[project.scripts]
+sgrcli = "sgrpy.cli._sgrcli:main"
+
+[project.urls]
+Homepage = "https://github.com/wsprague-nu/sgrpy"
+Issues = "https://github.com/wsprague-nu/sgrpy/issues"
+
+[tool.coverage.run]
+omit = [ "python/sgrpy/__about__.py" ]
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+profile = "release"
+module-name = "sgrpy.dl_rs"
+python-source = "python"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+
+[[tool.mypy.overrides]]
+module = [
+    "igraph.*",
+    "joblib.*",
+    "rdkit.*",
+    "scipy.*",
+]
+follow_imports = "skip"
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 80
+indent-width = 4
+target-version = "py312"
+
+[tool.ruff.format]
+indent-style = "space"
+line-ending = "lf"
+quote-style = "double"
+
+[tool.ruff.lint]
+select = ["B", "D", "E", "F", "I", "PL", "SIM", "W"]
+ignore = ["PLR0911","PLR0912","PLR0913","PLR0915"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.pytest.ini_options]
+addopts = "--cov=sgrpy --cov-report=term-missing --import-mode importlib"
