@@ -371,7 +371,7 @@ dependencies = [
 
 [[package]]
 name = "sgrpy"
-version = "0.1.7"
+version = "0.1.8"
 dependencies = [
  "approx",
  "itertools",
