@@ -10,6 +10,12 @@ This project provides various information-based graph routines (including the ti
 
 ### Installation
 
+#### Installation from PyPI
+
+1. Enter a virtual environment, if you want to use one.
+
+2. Run `pip install sgrpy`, or `pip install sgrpy[rdkit]` if you want to include the optional RDKit shim.
+
 #### Installation from Wheel
 
 1. Navigate to relevant Tag or Release (right sidebar).
@@ -48,7 +54,7 @@ This project provides various information-based graph routines (including the ti
 
 ### Tutorials
 
-- [CLI Tutorial](./doc/source/pages/CLI%20Tutorial.md)
+- [CLI Tutorial](https://github.com/wsprague-nu/sgrpy/blob/main/doc/source/pages/CLI%20Tutorial.md)
 - Python API Tutorial (to be released)
 
 ## Contact
